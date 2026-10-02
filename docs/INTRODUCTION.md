@@ -30,4 +30,4 @@ TUN Systemic Design concerns how people understand and control AI behavior. TUN 
 
 The three responsibilities overlap at deliberate interfaces. A management approval does not itself authorize a tool invocation. An engineering receipt does not itself prove organizational value. A presentation component does not make either claim true.
 
-This repository currently proposes the management model and supplies templates. Its examples are fictional, and its pilot remains planned.
+This repository proposes the management model and supplies templates plus an [experimental local pilot](PILOT.md). The pilot exercises a narrow record and review workflow with fixture identities and synthetic evidence. The narrative examples remain fictional; organizational adoption and real provider integration remain future work.

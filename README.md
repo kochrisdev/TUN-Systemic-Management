@@ -4,7 +4,7 @@
 
 TUN Systemic Management is a proposed management discipline for organizations in which people and AI systems both recommend, coordinate, and act. It connects organizational outcomes to explicit mandates, accountable decisions, resource limits, and reviews of what actually happened.
 
-**Current status: draft documentation v0.1.** This repository contains a management model, proposed requirements, adoption templates, and illustrative scenarios. It does not yet provide a runtime, executable schemas, a dashboard, or a validated organizational pilot.
+**Current status: draft specification with an experimental local pilot.** The repository includes a management model, templates, a specialized JSON Schema profile, and a Python/SQLite initiative-review pilot. The pilot uses fixture identities and synthetic evidence. There is no production identity integration, external provider, dashboard, or validated organizational adoption.
 
 ## The management question
 
@@ -34,6 +34,8 @@ Management supplies purpose and mandates. Engineering enforces current authority
 |---|---|
 | [Introduction](docs/INTRODUCTION.md) | Understand the problem through a concrete example |
 | [Getting started](docs/GETTING-STARTED.md) | Apply the draft to one bounded initiative |
+| [Run the local pilot](docs/PILOT.md) | Exercise version-bound decisions, shared reservations, evidence review, and restart |
+| [Pilot validation](docs/PILOT-VALIDATION-2026-10-02.md) | Inspect the named local run and its limitations |
 | [Concept note](docs/CONCEPT-NOTE-v0.1.md) | Understand the proposed scope and approach |
 | [Manifesto](docs/MANIFESTO-v0.1.md) | Read the twelve guiding commitments |
 | [Management model](docs/MANAGEMENT-MODEL-v0.1.md) | Follow the management loop across organizational levels |
@@ -41,11 +43,19 @@ Management supplies purpose and mandates. Engineering enforces current authority
 | [AI support initiative](examples/ai-support-initiative.md) | Walk through a fictional mandate, evidence review, and decision |
 | [Documentation index](docs/README.md) | Find the complete reference and templates |
 
-## First implementation direction
+## Try the local pilot
 
-The proposed first pilot is an AI Initiative Review: define an outcome, approve a bounded mandate, collect scoped observations, and record a decision to continue, change, expand, pause, or retire it. An eventual engineering integration should connect a selected action to an authoritative operation record; an eventual design integration should present the review without overstating its evidence.
+Use Python 3.11 or later in a virtual environment. From the repository root, after activating that environment:
 
-The worked examples are explanatory documents. The [pilot plan](docs/PILOT.md) defines what an implementation would need to demonstrate.
+```sh
+python -m pip install -r requirements-pilot.txt
+python -m reference.tsm_pilot.demo
+python -m unittest discover -s tests -v
+```
+
+The demo creates a temporary fixture database, approves a mandate, reserves part of a shared budget, reviews insufficient-quality observations, pauses new reservations, and reopens the store. It preserves an unknown-effect fixture alongside the outcome assessment. It never calls a model or provider, and a reservation is not an execution grant. See the [pilot guide](docs/PILOT.md) for Windows setup and retaining the database.
+
+Next: connect one bounded engineering operation and then a human review interface. The Markdown worked examples remain fictional narratives, separate from the executable fixture scenario.
 
 ## Project
 

@@ -1,6 +1,6 @@
 # Records and lifecycles v0.1
 
-Status: proposed semantics; no executable schema or supported API. [Documentation index](README.md) · [Specification](SPECIFICATION-v0.1.md)
+Status: proposed general semantics; a narrower [experimental schema profile](../schemas/README.md) is implemented. No stable API is released. [Documentation index](README.md) · [Specification](SPECIFICATION-v0.1.md)
 
 ## Shared record conventions
 
@@ -56,4 +56,4 @@ These values are illustrative, not released enums. A paused initiative may have 
 - A new review or correction preserves earlier assessments and explains what changed.
 - A stop decision and observed runtime intervention retain separate identities and outcomes.
 
-Schemas can eventually check field structure. Authority, access, current eligibility, cross-record meaning, and external effects need additional enforcement and evidence.
+The pilot schema checks a subset of field structures. Its host supplies additional reference, fixture-role, current-mandate, and shared-reservation checks. External authority, real identity, and provider effects need further enforcement and evidence. The general record vocabulary above is not identical to the pilot profile.

@@ -1,6 +1,6 @@
 # Proposed reference architecture
 
-Status: architecture proposal; no management runtime is implemented. [Documentation index](README.md) · [Records](RECORDS-AND-LIFECYCLES-v0.1.md)
+Status: general architecture proposal with a narrower [local record and reservation pilot](PILOT.md). [Documentation index](README.md) · [Records](RECORDS-AND-LIFECYCLES-v0.1.md)
 
 ## Responsibilities and feedback
 
@@ -46,3 +46,11 @@ Events need stable identities and producer references so retries do not duplicat
 ## First useful views
 
 An initiative page shows its outcome, accountable owner, current mandate, resource state, evidence, and next review. A review page compares the criteria with observations and presents options and uncertainties. A delegation page shows current authority and its history. These are proposed views; the repository does not supply a dashboard.
+
+## Implemented local boundary
+
+The experimental host stores immutable record revisions in SQLite and keeps a separate current-mandate projection. `BEGIN IMMEDIATE` serializes record changes and budget reservations. A new mandate revision becomes proposed and prevents fresh reservations under the previous revision. Approval, pause, and revocation are recorded decisions; the local reservation path checks the current revision and validity interval.
+
+Reservations consume a shared initiative ceiling and a cumulative mandate ceiling, including amounts reserved under earlier revisions of that mandate. They are neither actual spending records nor provider authorization. There is no settlement, release, or budget-increase API in this profile. Repeating an identical reservation request returns its historical record without creating capacity or fresh authority.
+
+Review assessments use a frozen set of current, matching observations for a declared window. Explicit corrections link to retained predecessors. Restricted observations make derived reviews and linked decisions restricted. These are application checks around caller-selected fixture identities; direct database or Python-process access remains trusted. The pilot does not authenticate people, verify external provenance, or implement a network boundary.

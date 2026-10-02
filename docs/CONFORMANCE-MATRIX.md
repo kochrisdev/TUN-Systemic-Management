@@ -2,7 +2,7 @@
 
 [Documentation index](README.md) · [Specification](SPECIFICATION-v0.1.md) · [Pilot plan](PILOT.md)
 
-All requirements are **unassessed**. The procedures below are plans, not completed checks. An assessment must name its product or organizational workflow, environment, specification source revision, reviewer, actual evidence, and limitations.
+All complete requirements remain **unassessed**. The procedures below describe broader assessments. Selected local scenarios now have [focused pilot evidence](PILOT-VALIDATION-2026-10-02.md), which does not complete those assessments. An assessment must name its product or organizational workflow, environment, specification source revision, reviewer, actual evidence, and limitations.
 
 | Requirement | Proposed assessment procedure | Evidence to retain | Status |
 |---|---|---|---|
@@ -20,6 +20,8 @@ All requirements are **unassessed**. The procedures below are plans, not complet
 | TSM-012 | Review an assessment report against actual artifacts and runs | Scope, revision, per-requirement results, exceptions, limitations | Unassessed |
 
 ## Assessment language
+
+The [pilot tests](../tests/test_pilot.py) provide partial evidence for version-bound decisions and current local reservation eligibility (TSM-002, TSM-003, TSM-004), shared reservation ceilings (TSM-005), evidence scope and review history (TSM-006, TSM-007), local pause behavior (TSM-008), and fixture-scoped access and immutable history (TSM-010). They do not establish real identity, provider enforcement, provenance authenticity, complete retention rules, organizational usefulness, or full requirement conformance.
 
 Draft-specified means a requirement is written. Implemented means relevant software or operating practice exists. Validated means a named check produced a result within a stated scope. Published means an artifact is available through a stated channel. These are separate claims.
 

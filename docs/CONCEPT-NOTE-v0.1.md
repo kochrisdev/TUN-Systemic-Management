@@ -28,9 +28,9 @@ The model can be used manually before software exists. A small implementation ca
 
 ## Initial artifacts
 
-The repository supplies a manifesto, twelve draft requirements, a record vocabulary, operating guidance, three templates, and two illustrative scenarios. General JSON schemas, persistent software, adapters, and organizational validation are future work.
+The repository supplies a manifesto, twelve draft requirements, a record vocabulary, operating guidance, three templates, and two illustrative scenarios. A [specialized schema profile](../schemas/README.md) and [Python/SQLite pilot](PILOT.md) now implement a narrow local review and reservation workflow. General schemas, provider and presentation adapters, and organizational validation remain future work.
 
-The first pilot should answer: can a team trace a review decision from an outcome and current mandate through relevant evidence, including unresolved operations, without silently increasing authority?
+The pilot's motivating question is: can a team trace a review decision from an outcome and current mandate through relevant evidence, including unresolved operations, without silently increasing authority? The current local checks supply partial technical evidence; they do not establish decision usefulness for a real team.
 
 ## Development approach
 

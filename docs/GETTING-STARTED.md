@@ -13,4 +13,4 @@ You can apply this draft manually. No installation is required to use the templa
 
 Read the [specification](SPECIFICATION-v0.1.md) and [conformance matrix](CONFORMANCE-MATRIX.md) when assessing the workflow. Mark requirements unassessed until actual evidence and reviewer judgment support a result.
 
-The [pilot plan](PILOT.md) describes future software work. There is currently no install command, running service, or executable management schema.
+For executable examples, follow the [local pilot guide](PILOT.md). It includes setup, a deterministic synthetic demonstration, and tests for the experimental schema and SQLite record store. This is a local Python program; no web service, production identity, or provider integration is supplied.

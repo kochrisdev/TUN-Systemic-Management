@@ -10,7 +10,7 @@ All v0.1 guidance is a draft. Proposed requirements are defined in the specifica
 
 **Adopting teams:** [Getting started](GETTING-STARTED.md) → [Initiative charter](../templates/initiative-charter.md) → [Worked initiative](../examples/ai-support-initiative.md) → [Review record](../templates/review-record.md).
 
-**Implementers:** [Specification](SPECIFICATION-v0.1.md) → [Records and lifecycles](RECORDS-AND-LIFECYCLES-v0.1.md) → [Architecture](ARCHITECTURE.md) → [Pilot plan](PILOT.md).
+**Implementers:** [Specification](SPECIFICATION-v0.1.md) → [Records and lifecycles](RECORDS-AND-LIFECYCLES-v0.1.md) → [Pilot schema profile](../schemas/README.md) → [Run the pilot](PILOT.md).
 
 ## Reference
 
@@ -27,6 +27,7 @@ All v0.1 guidance is a draft. Proposed requirements are defined in the specifica
 | [Threat model](THREAT-MODEL.md) | Management failure modes and planned challenges |
 | [Conformance matrix](CONFORMANCE-MATRIX.md) | Proposed assessment procedures; all requirements unassessed |
 | [Scope and non-claims](SCOPE.md) | What the repository does and does not establish |
+| [Local pilot validation](PILOT-VALIDATION-2026-10-02.md) | Named tests, demo results, source revision, and limitations |
 | [Status and roadmap](STATUS-AND-ROADMAP.md) | Existing artifacts and future milestones |
 
 ## Templates and scenarios
@@ -38,3 +39,5 @@ All v0.1 guidance is a draft. Proposed requirements are defined in the specifica
 - [Incident and mandate pause](../examples/incident-and-mandate-pause.md)
 
 See [Contributing](../CONTRIBUTING.md) for documentation checks and how to report evidence.
+
+The [experimental implementation](../reference/tsm_pilot/runtime.py) and [tests](../tests/test_pilot.py) cover a smaller boundary than the general specification. Complete requirements remain unassessed.

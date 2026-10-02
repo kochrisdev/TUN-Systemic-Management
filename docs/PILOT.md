@@ -1,38 +1,65 @@
-# Proposed pilot: AI Initiative Review
+# Local pilot: AI Initiative Review
 
-Status: planned, not implemented or run. [Documentation index](README.md) · [Support scenario](../examples/ai-support-initiative.md)
+Status: experimental implementation with focused local validation. [Documentation index](README.md) · [Validation report](PILOT-VALIDATION-2026-10-02.md) · [Schema profile](../schemas/README.md)
 
 ## Question
 
 Can a team trace a review decision from an organizational outcome and bounded mandate through scoped evidence, while preserving unknown effects and current authority?
 
-## First implementation boundary
+## Run the demonstration
 
-Use one initiative, one accountable human owner, fixture identities, and a durable local store. Support Outcome, Initiative, Mandate, Delegation, Decision, MetricDefinition, Observation, Review, Exception, and LearningRecord only as the selected scenario requires. Commitments, risks, and dependencies may initially be embedded while retaining their semantics.
+Requires Python 3.11 or later; the named local validation used Python 3.13.4. From the repository root on Windows PowerShell:
 
-Start with reviewable local records and synthetic observations clearly marked as fixtures. Then connect one bounded operation to the engineering pilot through a tested adapter. The engineering publication provider can demonstrate a review-summary publication; it does not supply a customer-support provider. Real identity, real customer data, and an external provider require later implementation and separate validation.
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-pilot.txt
+.\.venv\Scripts\python.exe -m reference.tsm_pilot.demo
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
 
-## Planned acceptance scenarios
+On macOS or Linux:
 
-| Case | Expected observable behavior |
-|---|---|
-| Initial charter and decision | Outcome, owner, assumptions, alternatives, limits, and review criteria remain inspectable |
-| Material mandate edit | A prior decision cannot silently approve the changed scope |
-| Delegation expiry or revocation | New effectful dispatch is denied under the defined host boundary |
-| Shared budget exhaustion | Concurrent commitments cannot each consume the same available capacity |
-| Missing or contradictory evidence | Review retains the limitation and cannot present a verified outcome |
-| Provider response lost | Original operation remains unresolved until reconciliation supplies evidence; no unsafe duplicate action |
-| Pause during accepted work | Stop decision, request, acknowledgement, and observed effectiveness remain separate |
-| Review and adaptation | Continue/change/expand/pause/retire decision records evidence, owners, and a next trigger |
-| Restart | Decisions, revisions, unresolved effects, and evidence references retain their meanings |
-| Restricted evidence | Unauthorized viewers cannot obtain source content through a summary or link |
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-pilot.txt
+.venv/bin/python -m reference.tsm_pilot.demo
+.venv/bin/python -m unittest discover -s tests -v
+```
 
-## What a report would contain
+These commands install into a repository-local environment. No credentials, model API, network service, or provider configuration is needed to run the installed pilot.
 
-Record the source revisions, environment, fixture boundaries, commands or manual procedures, actual results, failures, limitations, and reviewer. Keep operational acceptance separate from evaluation of whether the workflow improves decisions or is usable for people.
+The demo uses a fixed synthetic clock at `2026-10-02T12:00:00Z`. The runtime uses the current UTC clock unless a fixture clock is explicitly supplied. The demo's default temporary database is removed when the run ends. To retain it, use a new path:
 
-## Second scenario
+```powershell
+.\.venv\Scripts\python.exe -m reference.tsm_pilot.demo --db .pilot-data/first-run.sqlite3
+```
 
-Use the [incident and mandate pause](../examples/incident-and-mandate-pause.md) to challenge the same records under time pressure, changed authority, and an unknown effect. Extend the model when a concrete scenario exposes a gap.
+The command refuses existing paths. Choose another filename for a new run. `.pilot-data/` is ignored by Git.
 
-No acceptance scenario in this plan has been executed by a management runtime. The [conformance matrix](CONFORMANCE-MATRIX.md) lists proposed assessment procedures.
+## Implemented workflow
+
+The host creates an initiative with an embedded outcome and metric criteria, proposes a mandate with embedded delegation, and records a human-fixture decision about the exact mandate revision. Its agent fixture can reserve resources only within the currently active revision's actions, targets, interval, and limits. An SQLite transaction prevents concurrent reservations from spending the same headroom twice.
+
+Revisions are immutable. Proposing a new mandate revision makes the mandate proposed and prevents fresh reservations against the old revision. Approval does not carry over. Paused or revoked mandates require a new reviewed revision to resume in this profile. Existing reservations remain recorded and continue to consume capacity.
+
+Observation records distinguish outcome measurements from operation reports. Reviews inspect all current observations for the selected initiative and exact observation window, excluding explicitly superseded records while retaining their history. Stale or method/population-mismatched measurements cannot support a criterion. Conflicting measurements remain visible. An operation marked verified cannot satisfy an outcome criterion.
+
+A review's proposed action is a recommendation. It does not activate, pause, expand, or retire a mandate. A fixture owner must separately record a supported decision. The implemented decision actions are approve, reject, pause, and revoke; portfolio retirement and budget increases are not implemented.
+
+## Expected demo result
+
+The fixture measures draft quality at 90% against a 95% threshold, so the review assessment is `contradicted`. An unknown-effect fixture remains explicit in the review limitations. The owner pauses the mandate; a fresh reservation is rejected. Reopening the database preserves the review and earlier reservation.
+
+The demo reserves USD 350 of a USD 600 ceiling, leaving USD 250 of local reservation headroom. This is a separate synthetic scenario from the longer [Markdown support narrative](../examples/ai-support-initiative.md), which includes other commitments and costs.
+
+## Identity and evidence boundaries
+
+Callers select a fixed fixture identity: `owner-a`, `reviewer-a`, `viewer-a`, `agent-a`, or a separate scope's `owner-b` and `agent-b`. Owners manage their initiative and mandate decisions. Owners and reviewers can supply observations and create review recommendations. The delegate agent reserves resources. Viewers can read team-visible records. Reviewers-only evidence makes derived reviews and linked decisions reviewers-only.
+
+This selection mechanism is not authentication. The Python process and database access are trusted. Source references are recorded, not authenticated or fetched. The program does not encrypt records, implement retention/deletion, or provide an independently tamper-proof audit log.
+
+Reservations are accounting commitments, not provider execution grants or measured spending. Duplicate request identities return the original historical reservation only when all parameters match, even after a later pause; they never issue new authority. There is no settlement or capacity-release API in this increment.
+
+## Remaining acceptance work
+
+The [validation report](PILOT-VALIDATION-2026-10-02.md) maps actual local checks. Real identity, authenticated evidence, provider dispatch, lost-response reconciliation, cancellation acknowledgements, recovery, and Design components remain future integrations. The [incident narrative](../examples/incident-and-mandate-pause.md) still describes behavior beyond this local boundary. Complete [specification assessments](CONFORMANCE-MATRIX.md) remain unassessed.
