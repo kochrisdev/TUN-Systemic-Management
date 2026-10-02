@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "0.1", "recordType": "Initiative", "id": "initiative-fixture", "version": 1,
+  "scope": "team-a", "actor": "owner-a", "recordedAt": "2026-10-02T12:00:00Z", "visibility": "team",
+  "data": {
+    "title": "Synthetic support initiative", "outcome": "Meet the declared quality threshold",
+    "owner": "owner-a", "beneficiaries": "Fixture support users",
+    "baseline": "Unknown; measure a comparable sample before claiming improvement",
+    "assumptions": ["The sample represents eligible cases"], "alternatives": ["Improve guidance only"],
+    "criteria": [{
+      "id": "quality", "claim": "Sampled drafts meet the rubric", "unit": "percent",
+      "operator": "gte", "threshold": 95, "maxAgeSeconds": 604800,
+      "method": "rubric-v1", "population": "eligible-cases-v1"
+    }],
+    "budgetMinor": 60000, "currency": "USD", "reviewAt": "2026-10-09T12:00:00Z",
+    "stopConditions": ["Pause after a quality breach"], "dependencies": []
+  }
+}

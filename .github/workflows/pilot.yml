@@ -1,0 +1,33 @@
+name: TUN management pilot checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install the pinned pilot dependencies in an isolated environment
+        run: |
+          python3 --version
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r requirements-pilot.txt
+          .venv/bin/python -m pip check
+      - name: Check documentation and requirement references
+        run: python3 scripts/check_docs.py
+      - name: Run local pilot and schema scenarios
+        run: .venv/bin/python -m unittest discover -s tests -v
+      - name: Exercise the restart and pause demonstration
+        run: .venv/bin/python -m reference.tsm_pilot.demo
+      - name: Check whitespace
+        run: git diff --check
